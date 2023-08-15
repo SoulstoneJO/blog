@@ -1,23 +1,20 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'ROTE Blog',
-  author: 'ROTE',
-  headerTitle: 'ROTE Blog',
-  description: 'A blog',
-  language: 'en-us',
+  title: 'RoTe Blog',
+  author: 'RoTe',
+  headerTitle: 'RoTe Blog',
+  description: '一个分享技术的博客网站',
+  language: 'zh-CN',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
-  mastodon: 'https://mastodon.social/@mastodonuser',
-  email: 'address@yoursite.com',
+  // mastodon: 'https://mastodon.social/@mastodonuser',
+  email: 'jorakuten1995@gmail.com',
   github: 'https://github.com',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
-  locale: 'en-US',
+  // twitter: 'https://twitter.com/Twitter',
+  locale: 'zh-CN',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

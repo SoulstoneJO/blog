@@ -7,33 +7,77 @@ summary: 从零开始搭建一个博客并部署
 authors: ['default']
 ---
 
-A sample post with markdown.
+## 需求阐述
 
-## Inline Highlighting
+我需要一个能够分享技术并提供操作手顺的博客技术网站，并且尽量不要花钱(能白嫖Domain和Seerver最好)；我需要一个自动化部署的运维流程，只需要进行一次`git push`，CICD就能够帮我自动部署。
 
-Sample of inline highlighting `sum = parseInt(num1) + parseInt(num2)`
+## 技术选型
 
-## Code Blocks
+Next.js有很多免费的模板可以使用，并且它的扩展性很高，我需要的模板必须提供markdown编写，代码粘贴板，所以我选择了下面这一款。
 
-Some Javascript code
+> https://vercel.com/templates/next.js/tailwind-css-starter-blog  
+> This is a Next.js, Tailwind CSS blogging starter template. Version 2 is based on Next App directory with React Server Component and uses Contentlayer to manage markdown content.
+> Probably the most feature-rich Next.js markdown blogging template out there. Easily configurable and customizable. Perfect as a replacement to existing Jekyll and Hugo individual blogs.
+
+这款完全可以满足我的要求而且可扩展性也很高。
+
+## 准备工作
+
+Git  
+Node.js  
+Github Desktop[可选]  
+VSCode[可选]
+
+## 开发过程
+
+前往该模板的[Github仓库](https://github.com/timlrx/tailwind-nextjs-starter-blog)直接下载它的ZIP文件(我的需求很简单，所以并不需要它的Git Commit记录)，下载后解压缩到指定文件夹，并通过命令
+
+```shell
+git init
+```
+
+在根目录下生成一个本地git仓库，并导入到github desktop中进行管理。
+
+生成Git 仓库以后， 按照`README`中的手顺配置项目，我修改了以下几项：  
+`siteMetadata.js`  
+网站元数据的配置，按需更改；  
+`authors/default.md`  
+博客作者信息，留下了`default`文件，按需改成自己的信息；  
+`projectsData.js`  
+参与的项目及项目链接，按需改成自己的信息；
+`tag-data.json`
+Tag数据的修改，按需改成自己的信息；  
+  
+此外，由于我不准备使用搜索功能(需要服务器，付不起)和评论功能，所以我需要注释掉相关的UI代码
+
+路径: `\blog\components\Header.tsx`
 
 ```javascript
-var num1, num2, sum
-num1 = prompt('Enter first number')
-num2 = prompt('Enter second number')
-sum = parseInt(num1) + parseInt(num2) // "+" means "add"
-alert('Sum = ' + sum) // "+" means combine into a string
+              {link.title}
+            </Link>
+          ))}
+        {/* <SearchButton /> */}
+        <ThemeSwitch />
+        <MobileNav />
+      </div>
 ```
 
-Some Python code 🐍
+路径: `\blog\components\Comments.tsx`
 
-```python
-def fib():
-    a, b = 0, 1
-    while True:            # First iteration:
-        yield a            # yield 0 to start with and then
-        a, b = b, a + b    # a will now be 1, and b will also be 1, (0 + 1)
-
-for index, fibonacci_number in zip(range(10), fib()):
-     print('{i:3}: {f:3}'.format(i=index, f=fibonacci_number))
+```javascript
+  const [loadComments, setLoadComments] = useState(false)
+  return (
+    <>
+      {!loadComments && <button onClick={() => setLoadComments(true)}>Load Comments</button>}
+      {/* {!loadComments && <button onClick={() => setLoadComments(true)}>Load Comments</button>}
+      {siteMetadata.comments && loadComments && (
+        <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
+      )}
+      )} */}
+    </>
+  )
+}
 ```
+这样网页上就不会显示搜索和评论图标了
+
+## 部署
